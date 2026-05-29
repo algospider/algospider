@@ -2,7 +2,7 @@
 
 ```
  ██████╗ ███████╗██╗   ██╗███████╗██╗      ██████╗ ██████╗ ███████╗██████╗ 
-██╔════╝ ██╔════╝██║   ██║██╔════╝██║     ██╔═══██╗██╔══██╗██╔════╝██╔══██╗
+██╔════╝ ██╔════╝██║   ██║██╔════╝██║     ██╔═══██╗██╔══██╗██╔════╝██╔═══██╗
 ██║  ███╗█████╗  ██║   ██║█████╗  ██║     ██║   ██║██████╔╝█████╗  ██████╔╝
 ██║   ██║██╔══╝  ╚██╗ ██╔╝██╔══╝  ██║     ██║   ██║██╔═══╝ ██╔══╝  ██╔══██╗
 ╚██████╔╝███████╗ ╚████╔╝ ███████╗███████╗╚██████╔╝██║     ███████╗██║  ██║
@@ -63,6 +63,10 @@ Tools:        Android Studio  |  Git  |  Docker  |  Firebase
   </a>
 </div>
 
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=algospider&theme=tokyo-night&hide_border=true" width="100%"/>
+</div>
+
 ## Collaboration
 
 <div>
@@ -97,9 +101,9 @@ Building modern Android development tools together.
 
 <div align="center">
 
-<img src="https://visitor-badge.laobi.icu/badge?page_id=algospider" alt="Visitor Badge"/>
+<img src="https://visitor-badge.laobi.icu/badge?page_id=algospider.algospider" alt="Visitor Badge"/>
 
-`Last updated: 2026`
+<p><sub>Last updated: May 2026</sub></p>
 
 </div>
 
@@ -107,6 +111,8 @@ Building modern Android development tools together.
   :root {
     --primary: #667eea;
     --secondary: #764ba2;
+    --tertiary: #f093fb;
+    --quaternary: #4facfe;
   }
   
   @keyframes gradient {
@@ -115,9 +121,39 @@ Building modern Android development tools together.
     100% { background-position: 0% 50%; }
   }
   
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
   body {
-    background: linear-gradient(-45deg, var(--primary), var(--secondary), #f093fb, #4facfe);
+    background: linear-gradient(-45deg, var(--primary), var(--secondary), var(--tertiary), var(--quaternary));
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
+    min-height: 100vh;
+  }
+  
+  div {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  h2 {
+    animation: slideIn 0.8s ease-in-out;
+    color: #667eea;
+    font-weight: 700;
+  }
+  
+  img[src*="badge"] {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  img[src*="badge"]:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
   }
 </style>
