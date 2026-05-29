@@ -11,30 +11,25 @@
 
 ### 🚀 Android Developer | Mobile Tools Builder
 
-![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+[![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com)
+[![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com)
 
 </div>
 
 ---
 
-## 💡 Building
-Advanced text editors • Mobile apps • AI solutions • Developer tools
+## 💡 What I Build
+Text editors • Mobile apps • AI solutions • Developer tools
 
 ## 📌 Featured Projects
 - **[Xed-Editor](https://github.com/algospider/Xed-Editor)** — Advanced Android text editor  
 - **[opencode-android](https://github.com/algospider/opencode-android)** — Mobile dev toolkit  
 - **[ToolNeuron](https://github.com/algospider/ToolNeuron)** — Offline AI ecosystem
 
-## 📊 GitHub Stats
-<div align="center">
-  
-![algospider's Stats](https://github-readme-stats.vercel.app/api?username=algospider&show_icons=true&theme=tokyonight&hide_border=true)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=algospider&layout=compact&theme=tokyonight&hide_border=true)
-
-</div>
+## 💻 Tech Stack
+`Android` `Kotlin` `TypeScript` `Java` `JavaScript` `Firebase`
 
 ## 🤝 Collaborating with [@Smthbig](https://github.com/Smthbig)
 
@@ -42,9 +37,9 @@ Advanced text editors • Mobile apps • AI solutions • Developer tools
 
 <div align="center">
 
-[![GitHub](https://img.shields.io/badge/-GitHub-100000?style=for-the-badge&logo=github)](https://github.com/algospider)
-[![Email](https://img.shields.io/badge/-Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:mohanrajauria@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github)](https://github.com/algospider)
+[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:mohanrajauria@gmail.com)
 
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=algospider.algospider)
+**[View My Work](https://github.com/algospider?tab=repositories)**
 
 </div>
