@@ -22,12 +22,6 @@
 
 ## 💡 What I Build
 Text editors • Mobile apps • AI solutions • Developer tools
-
-## 📌 Featured Projects
-- **[Xed-Editor](https://github.com/algospider/Xed-Editor)** — Advanced Android text editor  
-- **[opencode-android](https://github.com/algospider/opencode-android)** — Mobile dev toolkit  
-- **[ToolNeuron](https://github.com/algospider/ToolNeuron)** — Offline AI ecosystem
-
 ## 💻 Tech Stack
 `Android` `Kotlin` `TypeScript` `Java` `JavaScript` `Firebase`
 
