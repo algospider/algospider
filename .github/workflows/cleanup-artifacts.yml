@@ -14,8 +14,55 @@ on:
         type: boolean
 
 jobs:
+  quota-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check current artifact storage
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          script: |
+            const freeQuotaMB = 500;
+            let totalBytes = 0;
+            let totalArtifacts = 0;
+            let totalRepos = 0;
+
+            for await (const repo of github.paginate.iterator(
+              github.rest.repos.listForAuthenticatedUser, { per_page: 100, type: 'owner' }
+            )) {
+              if (repo.archived || repo.fork) continue;
+
+              for await (const artifact of github.paginate.iterator(
+                github.rest.actions.listArtifactsForRepo,
+                { owner: repo.owner.login, repo: repo.name, per_page: 100 }
+              )) {
+                totalBytes += artifact.size_in_bytes;
+                totalArtifacts++;
+              }
+              totalRepos++;
+            }
+
+            const totalMB = (totalBytes / 1048576).toFixed(1);
+            const usedPercent = ((totalMB / freeQuotaMB) * 100).toFixed(1);
+
+            console.log('═══════════════════════════════════════════');
+            console.log('  BEFORE CLEANUP');
+            console.log('═══════════════════════════════════════════');
+            console.log(`  Repos:    ${totalRepos}`);
+            console.log(`  Artifacts: ${totalArtifacts}`);
+            console.log(`  Size:     ${totalMB} MB / ${freeQuotaMB} MB`);
+            console.log(`  Usage:    ${usedPercent}%`);
+            console.log('═══════════════════════════════════════════');
+
+            if (totalMB >= freeQuotaMB) {
+              core.warning(`Quota exceeded: ${totalMB} MB used`);
+            }
+
+            core.setOutput('before_mb', totalMB);
+
   cleanup:
     runs-on: ubuntu-latest
+    needs: quota-check
     steps:
       - name: Delete old artifacts across all repos
         uses: actions/github-script@v8
@@ -28,70 +75,47 @@ jobs:
             cutoff.setDate(cutoff.getDate() - daysOld);
 
             let totalDeleted = 0;
+            let totalFreed = 0;
             let totalRepos = 0;
-            let repoPage = 1;
-            let hasMoreRepos = true;
 
-            while (hasMoreRepos) {
-              const repos = await github.paginate(github.rest.repos.listForAuthenticatedUser, {
-                per_page: 100,
-                page: repoPage,
-                type: 'owner',
-              });
+            for await (const repo of github.paginate.iterator(
+              github.rest.repos.listForAuthenticatedUser, { per_page: 100, type: 'owner' }
+            )) {
+              if (repo.archived) continue;
+              const fullName = repo.full_name;
+              let repoDeleted = 0;
+              let repoFreed = 0;
 
-              if (repos.length === 0) break;
+              for await (const artifact of github.paginate.iterator(
+                github.rest.actions.listArtifactsForRepo,
+                { owner: repo.owner.login, repo: repo.name, per_page: 100 }
+              )) {
+                if (new Date(artifact.created_at) >= cutoff) continue;
 
-              for (const repo of repos) {
-                const fullName = repo.full_name;
-                if (repo.archived) {
-                  console.log(`Skipping archived repo: ${fullName}`);
-                  continue;
-                }
-
-                let artifactPage = 1;
-                let hasMoreArtifacts = true;
-                let repoDeleted = 0;
-
-                while (hasMoreArtifacts) {
-                  const { data } = await github.rest.actions.listArtifactsForRepo({
-                    owner: repo.owner.login,
-                    repo: repo.name,
-                    per_page: 100,
-                    page: artifactPage,
+                console.log(
+                  `${dryRun ? '[DRY RUN]' : ''} [${fullName}] "${artifact.name}" ` +
+                  `${(artifact.size_in_bytes / 1024).toFixed(1)} KB (created: ${artifact.created_at})`
+                );
+                if (!dryRun) {
+                  await github.rest.actions.deleteArtifact({
+                    owner: repo.owner.login, repo: repo.name, artifact_id: artifact.id,
                   });
-
-                  const oldArtifacts = data.artifacts.filter(
-                    a => new Date(a.created_at) < cutoff
-                  );
-
-                  for (const artifact of oldArtifacts) {
-                    console.log(
-                      `${dryRun ? '[DRY RUN] Would delete' : 'Deleting'} ` +
-                      `[${fullName}] "${artifact.name}" (id: ${artifact.id}, created: ${artifact.created_at})`
-                    );
-                    if (!dryRun) {
-                      await github.rest.actions.deleteArtifact({
-                        owner: repo.owner.login,
-                        repo: repo.name,
-                        artifact_id: artifact.id,
-                      });
-                    }
-                  }
-
-                  repoDeleted += oldArtifacts.length;
-                  hasMoreArtifacts = data.total_count > artifactPage * 100;
-                  artifactPage++;
                 }
-
-                if (repoDeleted > 0) {
-                  console.log(`${fullName}: ${repoDeleted} artifact(s) processed`);
-                }
-                totalDeleted += repoDeleted;
-                totalRepos++;
+                repoDeleted++;
+                repoFreed += artifact.size_in_bytes;
               }
 
-              hasMoreRepos = repos.length === 100;
-              repoPage++;
+              if (repoDeleted > 0) {
+                console.log(`${fullName}: ${repoDeleted} artifact(s), ${(repoFreed / 1048576).toFixed(1)} MB freed`);
+              }
+              totalDeleted += repoDeleted;
+              totalFreed += repoFreed;
+              totalRepos++;
             }
 
-            console.log(`Done. Scanned ${totalRepos} repos. ${dryRun ? 'Found' : 'Deleted'} ${totalDeleted} artifacts older than ${daysOld} days.`);
+            const freedMB = (totalFreed / 1048576).toFixed(1);
+            console.log(`\nDone. ${dryRun ? 'Found' : 'Deleted'} ${totalDeleted} artifacts (${freedMB} MB) across ${totalRepos} repos.`);
+
+            const beforeMB = parseFloat('${{ needs.quota-check.outputs.before_mb }}');
+            const afterMB = Math.max(0, beforeMB - parseFloat(freedMB)).toFixed(1);
+            console.log(`Storage: ${beforeMB} MB → ${afterMB} MB`);
