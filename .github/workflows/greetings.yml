@@ -1,0 +1,33 @@
+name: Welcome new faces
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            Hey there! Thanks for opening an issue.
+
+            I'll try to get back to you as soon as I can.
+            In the meantime, make sure you've included:
+              - What you were trying to do
+              - What actually happened
+              - Steps to reproduce (if it's a bug)
+
+            Cheers.
+          pr-message: |
+            Thanks for the PR! Really appreciate the help.
+
+            A few things before I review:
+            - Make sure the existing tests still pass
+            - Add tests if you introduced new functionality
+            - Keep the changes focused — one PR = one thing
+
+            I'll take a look as soon as I can.

@@ -1,0 +1,23 @@
+android:
+  - '**/*.kt'
+  - '**/*.java'
+  - '**/*.xml'
+  - '**/gradle*'
+
+documentation:
+  - '**/*.md'
+  - '**/docs/**'
+
+frontend:
+  - '**/*.ts'
+  - '**/*.tsx'
+  - '**/*.js'
+  - '**/*.css'
+
+ci/cd:
+  - '.github/**'
+
+dependencies:
+  - '**/build.gradle*'
+  - '**/package.json'
+  - '**/requirements.txt'
