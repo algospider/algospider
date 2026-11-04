@@ -4,6 +4,11 @@ on:
     - cron: '0 */6 * * *'
   workflow_dispatch:
 
+# 2026-11-04: re-armed schedule after github's idle-cron disable + explicitly
+# granted contents:write so the activity commit can't be rejected.
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
