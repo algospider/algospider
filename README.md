@@ -20,19 +20,19 @@
 
 | project | dispatch |
 |:--|:--|
-| [**botix**](https://github.com/algospider/Botix) | ai code editor that lives on a phone · kotlin + compose, offline brain — cursor-for-android, zero subscriptions |
-| [**devpilot**](https://github.com/KrishnaVipul14/DevPilot) | automated repo health unit with [@KrishnaVipul14](https://github.com/KrishnaVipul14) · blast radius mapping, automated fix & verification |
-| [**git-genius**](https://github.com/Wroughtline/git-genius) | natural language git cli · translates everyday intent to git plumbing, previews, then executes |
+| [**botix**](https://github.com/algospider/Botix) | phone-native ai code editor · kotlin + compose, offline brain |
+| [**devpilot**](https://github.com/KrishnaVipul14/DevPilot) | repo health unit with [@KrishnaVipul14](https://github.com/KrishnaVipul14) · blast radius mapping, fix & verify |
+| [**git-genius**](https://github.com/Wroughtline/git-genius) | plain-english git cli · translates intent to git plumbing |
 
 ## 02 · shipped
 
 | project | dispatch |
 |:--|:--|
-| [**8gen**](https://github.com/algospider/8gen) | prompt → playable 8-bit game · local ollama inference, zero api keys |
-| [**CLIGit**](https://github.com/algospider/CLIGit) | high-performance terminal git assistant in Go · zero git vocabulary required |
-| [**quizly**](https://github.com/algospider/QUIZLY) | ai quiz generation platform · retro terminal ui, provider fallback cascade, pdf in → quiz out |
-| [**desktop-launcher**](https://github.com/algospider/Desktop-Launcher) | android desktop experience · bento grid dashboard + draggable floating multi-windows |
-| [**oorja-attendance**](https://github.com/algospider/oorja-attendance) | live club event gate pass & verification system · built and shipped in one evening |
+| [**8gen**](https://github.com/algospider/8gen) | prompt → playable 8-bit game · local ollama, zero api keys |
+| [**CLIGit**](https://github.com/algospider/CLIGit) | fast terminal git assistant in go · zero git knowledge needed |
+| [**quizly**](https://github.com/algospider/QUIZLY) | ai quiz engine · retro ui, fallback cascade, pdf in → quiz out |
+| [**desktop-launcher**](https://github.com/algospider/Desktop-Launcher) | android desktop · bento tiles + floating draggable windows |
+| [**oorja-attendance**](https://github.com/algospider/oorja-attendance) | event attendance gate · built and shipped the same evening |
 
 <details open>
 <summary><strong>03 · schematic</strong> — how the machine is wired</summary>
