@@ -17,8 +17,11 @@ on:
 jobs:
   quota-check:
     runs-on: ubuntu-latest
+    outputs:
+      before_mb: ${{ steps.check.outputs.before_mb }}
     steps:
-      - name: Check current artifact storage
+      - id: check
+        name: Check current artifact storage
         uses: actions/github-script@v8
         with:
           github-token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
@@ -28,19 +31,23 @@ jobs:
             let totalArtifacts = 0;
             let totalRepos = 0;
 
-            for await (const repo of github.paginate.iterator(
+            for await (const response of github.paginate.iterator(
               github.rest.repos.listForAuthenticatedUser, { per_page: 100, type: 'owner' }
             )) {
-              if (repo.archived || repo.fork) continue;
+              for (const repo of response.data) {
+                if (repo.archived || repo.fork) continue;
 
-              for await (const artifact of github.paginate.iterator(
-                github.rest.actions.listArtifactsForRepo,
-                { owner: repo.owner.login, repo: repo.name, per_page: 100 }
-              )) {
-                totalBytes += artifact.size_in_bytes;
-                totalArtifacts++;
+                for await (const artResponse of github.paginate.iterator(
+                  github.rest.actions.listArtifactsForRepo,
+                  { owner: repo.owner.login, repo: repo.name, per_page: 100 }
+                )) {
+                  for (const artifact of artResponse.data) {
+                    totalBytes += artifact.size_in_bytes;
+                    totalArtifacts++;
+                  }
+                }
+                totalRepos++;
               }
-              totalRepos++;
             }
 
             const totalMB = (totalBytes / 1048576).toFixed(1);
@@ -79,39 +86,43 @@ jobs:
             let totalFreed = 0;
             let totalRepos = 0;
 
-            for await (const repo of github.paginate.iterator(
+            for await (const response of github.paginate.iterator(
               github.rest.repos.listForAuthenticatedUser, { per_page: 100, type: 'owner' }
             )) {
-              if (repo.archived) continue;
-              const fullName = repo.full_name;
-              let repoDeleted = 0;
-              let repoFreed = 0;
+              for (const repo of response.data) {
+                if (repo.archived) continue;
+                const fullName = repo.full_name;
+                let repoDeleted = 0;
+                let repoFreed = 0;
 
-              for await (const artifact of github.paginate.iterator(
-                github.rest.actions.listArtifactsForRepo,
-                { owner: repo.owner.login, repo: repo.name, per_page: 100 }
-              )) {
-                if (new Date(artifact.created_at) >= cutoff) continue;
+                for await (const artResponse of github.paginate.iterator(
+                  github.rest.actions.listArtifactsForRepo,
+                  { owner: repo.owner.login, repo: repo.name, per_page: 100 }
+                )) {
+                  for (const artifact of artResponse.data) {
+                    if (new Date(artifact.created_at) >= cutoff) continue;
 
-                console.log(
-                  `${dryRun ? '[DRY RUN]' : ''} [${fullName}] "${artifact.name}" ` +
-                  `${(artifact.size_in_bytes / 1024).toFixed(1)} KB (created: ${artifact.created_at})`
-                );
-                if (!dryRun) {
-                  await github.rest.actions.deleteArtifact({
-                    owner: repo.owner.login, repo: repo.name, artifact_id: artifact.id,
-                  });
+                    console.log(
+                      `${dryRun ? '[DRY RUN]' : ''} [${fullName}] "${artifact.name}" ` +
+                      `${(artifact.size_in_bytes / 1024).toFixed(1)} KB (created: ${artifact.created_at})`
+                    );
+                    if (!dryRun) {
+                      await github.rest.actions.deleteArtifact({
+                        owner: repo.owner.login, repo: repo.name, artifact_id: artifact.id,
+                      });
+                    }
+                    repoDeleted++;
+                    repoFreed += artifact.size_in_bytes;
+                  }
                 }
-                repoDeleted++;
-                repoFreed += artifact.size_in_bytes;
-              }
 
-              if (repoDeleted > 0) {
-                console.log(`${fullName}: ${repoDeleted} artifact(s), ${(repoFreed / 1048576).toFixed(1)} MB freed`);
+                if (repoDeleted > 0) {
+                  console.log(`${fullName}: ${repoDeleted} artifact(s), ${(repoFreed / 1048576).toFixed(1)} MB freed`);
+                }
+                totalDeleted += repoDeleted;
+                totalFreed += repoFreed;
+                totalRepos++;
               }
-              totalDeleted += repoDeleted;
-              totalFreed += repoFreed;
-              totalRepos++;
             }
 
             const freedMB = (totalFreed / 1048576).toFixed(1);

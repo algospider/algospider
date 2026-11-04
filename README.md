@@ -10,7 +10,7 @@
 <div align="center">
   <sub>
     <img alt="profile views" src="https://komarev.com/ghpvc/?username=algospider&style=flat&color=58A6FF&label=loads&short_name=true" />
-    &nbsp;·&nbsp; <a href="https://github.com/algospider/algospider">source of this page¹</a>
+    &nbsp;·&nbsp; <a href="https://github.com/algospider/algospider">source of this page</a>
   </sub>
 </div>
 
@@ -18,21 +18,21 @@
 
 ## 01 · live
 
-| | |
+| project | dispatch |
 |:--|:--|
-| **[botix](https://github.com/algospider/Botix)** | ai code editor that lives on a phone. kotlin + compose, offline brain — cursor-for-android, no subscription |
-| **[devpilot](https://github.com/KrishnaVipul14/DevPilot)** | repo health unit with [@KrishnaVipul14](https://github.com/KrishnaVipul14) — scan, map blast radius, fix, verify² |
-| **[git-genius](https://github.com/Wroughtline/git-genius)** | git for people whose whole vocabulary is `git add .` — says the command in plain english, then runs it |
+| [**botix**](https://github.com/algospider/Botix) | ai code editor that lives on a phone · kotlin + compose, offline brain — cursor-for-android, zero subscriptions |
+| [**devpilot**](https://github.com/KrishnaVipul14/DevPilot) | automated repo health unit with [@KrishnaVipul14](https://github.com/KrishnaVipul14) · blast radius mapping, automated fix & verification |
+| [**git-genius**](https://github.com/Wroughtline/git-genius) | natural language git cli · translates everyday intent to git plumbing, previews, then executes |
 
 ## 02 · shipped
 
-| | |
+| project | dispatch |
 |:--|:--|
-| [**8gen**](https://github.com/algospider/8gen) | prompt → playable game. ollama, zero api keys |
-| [**CLIGit**](https://github.com/algospider/CLIGit) | the same idea as git-genius, in go — you never had to learn the commands |
-| [**quizly**](https://github.com/algospider/QUIZLY) | ai quiz platform — retro ui, provider fallback chain, pdf in → quiz out |
-| [**desktop-launcher**](https://github.com/algospider/Desktop-Launcher) | bento tiles + a fake pc with draggable floating windows |
-| [**oorja-attendance**](https://github.com/algospider/oorja-attendance) | club event attendance gate — built and shipped the same evening it was needed |
+| [**8gen**](https://github.com/algospider/8gen) | prompt → playable 8-bit game · local ollama inference, zero api keys |
+| [**CLIGit**](https://github.com/algospider/CLIGit) | high-performance terminal git assistant in Go · zero git vocabulary required |
+| [**quizly**](https://github.com/algospider/QUIZLY) | ai quiz generation platform · retro terminal ui, provider fallback cascade, pdf in → quiz out |
+| [**desktop-launcher**](https://github.com/algospider/Desktop-Launcher) | android desktop experience · bento grid dashboard + draggable floating multi-windows |
+| [**oorja-attendance**](https://github.com/algospider/oorja-attendance) | live club event gate pass & verification system · built and shipped in one evening |
 
 <details open>
 <summary><strong>03 · schematic</strong> — how the machine is wired</summary>
@@ -62,7 +62,7 @@ flowchart LR
 
 acode · soraX · rikkahub · localdesktop · toolneuron · opencode-android · termux-generator · vscode
 
-fork → open → patch → cannibalize → botix. xed-editor taught me release CI, opencode-android taught me what not to rename on fork, vscode was simply too big to not gut.³
+fork → open → patch → cannibalize → botix. xed-editor taught me release CI, opencode-android taught me what not to rename on fork, vscode was simply too big to not gut.
 
 <br>
 </details>
@@ -131,23 +131,23 @@ fork → open → patch → cannibalize → botix. xed-editor taught me release 
 $ tail -f ~/algospider.activity
 ```
 
-<!--RECENT_ACTIVITY:start-->
-<!--RECENT_ACTIVITY:end-->
+<!--START_SECTION:activity-->
+<!--END_SECTION:activity-->
 
 <details>
 <summary><b>how this updates</b></summary>
 
-a workflow queries the api every few hours and commits the diff here — the section above is data, not memory. github's idle-cron garbage man disabled it once; pushing a workflow file wakes it back up.
+a workflow queries the github events api every few hours and commits the diff here — the section above is data, not memory.
 
 </details>
 
 <br>
 
 <p align="center">
-  <a href="https://instagram.com/mohan.hex">
+  <a href="mailto:mohanrajauria@gmail.com">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/instagram-mohan.hex-E4405F?style=flat-square&logo=instagram&labelColor=0D1117">
-      <img src="https://img.shields.io/badge/instagram-mohan.hex-E4405F?style=flat-square&logo=instagram&labelColor=FFFFFF" alt="instagram" />
+      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/email-mohanrajauria%40gmail.com-EA4335?style=flat-square&logo=gmail&labelColor=0D1117">
+      <img src="https://img.shields.io/badge/email-mohanrajauria%40gmail.com-EA4335?style=flat-square&logo=gmail&labelColor=FFFFFF" alt="email" />
     </picture>
   </a>
   <a href="https://github.com/Wroughtline">
@@ -162,16 +162,14 @@ a workflow queries the api every few hours and commits the diff here — the sec
       <img src="https://img.shields.io/badge/botix-star_if_it_compiles-8B949E?style=flat-square&logo=github&labelColor=FFFFFF" alt="botix" />
     </picture>
   </a>
+  <a href="https://instagram.com/mohan.hex">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/instagram-mohan.hex-E4405F?style=flat-square&logo=instagram&labelColor=0D1117">
+      <img src="https://img.shields.io/badge/instagram-mohan.hex-E4405F?style=flat-square&logo=instagram&labelColor=FFFFFF" alt="instagram" />
+    </picture>
+  </a>
 </p>
 
 <p align="center"><sub>
   — m. · i answer dms before issues · nov 2026, edition 3
 </sub></p>
-
----
-
-¹ *yes, the profile page source is on github — of course it is. dig through the commit history, watch the thing grow.*
-
-² *devpilot's upstream is [@KrishnaVipul14](https://github.com/KrishnaVipul14)'s — i work the scan-fix-verify lane.*
-
-³ *stars aren't the achievement. shipping is. the pile exists to be eaten.*
