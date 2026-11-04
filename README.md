@@ -132,6 +132,11 @@ $ tail -f ~/algospider.activity
 ```
 
 <!--START_SECTION:activity-->
+1. 🎉 Merged PR [#8](https://github.com/KrishnaVipul14/DevPilot/pull/8) in [KrishnaVipul14/DevPilot](https://github.com/KrishnaVipul14/DevPilot)
+2. 💪 Opened PR [#8](https://github.com/KrishnaVipul14/DevPilot/pull/8) in [KrishnaVipul14/DevPilot](https://github.com/KrishnaVipul14/DevPilot)
+3. 🎉 Merged PR [#7](https://github.com/KrishnaVipul14/DevPilot/pull/7) in [KrishnaVipul14/DevPilot](https://github.com/KrishnaVipul14/DevPilot)
+4. 💪 Opened PR [#7](https://github.com/KrishnaVipul14/DevPilot/pull/7) in [KrishnaVipul14/DevPilot](https://github.com/KrishnaVipul14/DevPilot)
+5. 🎉 Merged PR [#6](https://github.com/KrishnaVipul14/DevPilot/pull/6) in [KrishnaVipul14/DevPilot](https://github.com/KrishnaVipul14/DevPilot)
 <!--END_SECTION:activity-->
 
 <details>
